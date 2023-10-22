@@ -34,7 +34,7 @@
 
 1. Создать Deployment приложения, состоящего из двух контейнеров (nginx и multitool), с количеством реплик 3 шт.
 
-deployment-1.yaml
+[deployment-1](deployment-1.yaml)
 ```yaml
 ---
 apiVersion: apps/v1
@@ -68,7 +68,7 @@ spec:
 
 2. Создать Service, который обеспечит доступ внутри кластера до контейнеров приложения из п.1 по порту 9001 — nginx 80, по 9002 — multitool 8080.
 
-service-1.yaml
+[service-1](service-1.yaml)
 ```yaml
 ---
 apiVersion: v1
@@ -90,7 +90,7 @@ spec:
 
 3. Создать отдельный Pod с приложением multitool и убедиться с помощью `curl`, что из пода есть доступ до приложения из п.1 по разным портам в разные контейнеры.
 
-pod-1.yaml
+[pod-1](pod-1.yaml)
 ```yaml
 ---
 apiVersion: v1
