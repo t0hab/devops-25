@@ -1,27 +1,34 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-1
+  name: deployment
   labels:
-    app: deployment-1
+    app: nginx
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: deployment-1
+      app: nginx
   template:
     metadata:
       labels:
-        app: deployment-1
+        app: nginx
     spec:
       containers:
-        - name: nginx
-          image: nginx
-        - name: multitool
-          image: wbitt/network-multitool
-          env:
-            - name: HTTP_PORT
-              value: "8080"
-            - name: HTTPS_PORT
-              value: "11443"
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+      - name: multitool
+        image: wbitt/network-multitool
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: HTTP_PORT
+          value: "8080"
+        ports:
+        - containerPort: 1180
+          name: http-port
+        resources:
+            limits:
+              cpu: 200m
+              memory: 512Mi

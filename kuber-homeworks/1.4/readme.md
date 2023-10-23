@@ -36,33 +36,40 @@
 
 [deployment-1](deployment-1.yaml)
 ```yaml
----
-apiVersion: apps/v1
+apiVersion: v1
 kind: Deployment
 metadata:
-  name: deployment-1
+  name: deployment
   labels:
-    app: deployment-1
+    app: nginx
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: deployment-1
+      app: nginx
   template:
     metadata:
       labels:
-        app: deployment-1
+        app: nginx
     spec:
       containers:
-        - name: nginx
-          image: nginx
-        - name: multitool
-          image: wbitt/network-multitool
-          env:
-            - name: HTTP_PORT
-              value: "8080"
-            - name: HTTPS_PORT
-              value: "11443"
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+      - name: multitool
+        image: wbitt/network-multitool
+        imagePullPolicy: IfNotPresent
+        env:.
+        - name: HTTP_PORT
+          value: "8080"
+        ports:
+        - containerPort: 1180
+          name: http-port
+        resources:
+            limits:
+              cpu: 200m
+              memory: 512Mi
 ```
 ![Alt text](image.png)
 
@@ -70,21 +77,20 @@ spec:
 
 [service-1](service-1.yaml)
 ```yaml
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-1
+  name: nginx-svc
 spec:
-  selector:
-    app: deployment-1
   ports:
-    - name: nginx-http
+    - name: nginx
       port: 9001
       targetPort: 80
-    - name: multitool-http
+    - name: multitool
       port: 9002
       targetPort: 8080
+  selector:
+    app: nginx
 ```
 ![Alt text](image-1.png)
 
@@ -92,7 +98,6 @@ spec:
 
 [pod-1](pod-1.yaml)
 ```yaml
----
 apiVersion: v1
 kind: Pod
 metadata:
@@ -111,11 +116,11 @@ spec:
 ```
 ![Alt text](image-2.png)
 ![Alt text](image-3.png)
-![Alt text](image-4.png)
-![Alt text](image-5.png)
+
 
 4. Продемонстрировать доступ с помощью `curl` по доменному имени сервиса. 
-![Alt text](image-6.png)
+
+![Alt text](image-4.png)
 
 ------
 
@@ -124,6 +129,40 @@ spec:
 1. Создать отдельный Service приложения из Задания 1 с возможностью доступа снаружи кластера к nginx, используя тип NodePort.
 2. Продемонстрировать доступ с помощью браузера или `curl` с локального компьютера.
 3. Предоставить манифест и Service в решении, а также скриншоты или вывод команды п.2.
+
+### Ответ
+
+1. Создать отдельный Service приложения из Задания 1 с возможностью доступа снаружи кластера к nginx, используя тип NodePort.
+
+[service-2](service-2.yaml)
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc2
+spec:
+  ports:
+    - name: nginx
+      port: 9001
+      targetPort: 80
+      nodePort: 30001
+    - name: multitool
+      port: 9002
+      targetPort: 8080
+      nodePort: 30002
+  selector:
+    app: nginx
+  type: NodePort
+```
+![Alt text](image-5.png)
+
+2. Продемонстрировать доступ с помощью браузера или `curl` с локального компьютера.
+
+![Alt text](image-6.png)
+
+3. Предоставить манифест и Service в решении, а также скриншоты или вывод команды п.2.
+
+
 
 ------
 
