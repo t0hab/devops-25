@@ -28,11 +28,13 @@
 1. Создать Deployment приложения _frontend_ из образа nginx с количеством реплик 3 шт.
 
 [frontend](frontend.yaml)
+
 ![Alt text](image.png)
 
 2. Создать Deployment приложения _backend_ из образа multitool. 
 
 [backend](backend.yaml)
+
 ![Alt text](image-1.png)
 
 3. Добавить Service, которые обеспечат доступ к обоим приложениям внутри кластера. 
@@ -40,6 +42,7 @@
 [service-backend](service-backend.yaml)
 
 [service-frontend](service-frontend.yaml)
+
 ![Alt text](image-2.png)
 
 4. Продемонстрировать, что приложения видят друг друга с помощью Service.
