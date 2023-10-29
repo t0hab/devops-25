@@ -38,6 +38,7 @@
 3. Добавить Service, которые обеспечат доступ к обоим приложениям внутри кластера. 
 
 [service-backend](service-backend.yaml)
+
 [service-frontend](service-frontend.yaml)
 ![Alt text](image-2.png)
 
