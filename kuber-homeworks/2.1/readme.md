@@ -37,7 +37,7 @@
 ![Alt text](image.png)
 ![Alt text](image-1.png)
 
-![deployment1.yaml](deployment1.yaml)
+[deployment1.yaml](deployment1.yaml)
 
 ------
 
