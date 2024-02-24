@@ -97,3 +97,4 @@ Success! The configuration is valid.
 * Находясь на виртуальной машине private-instance, проверим доступ в Интернет:
 
 ![alt text](image-15.png)
+
