@@ -98,3 +98,4 @@ Success! The configuration is valid.
 
 ![alt text](image-15.png)
 
+* Файл [terraform_file](for_netology.tf)
