@@ -85,8 +85,6 @@ Success! The configuration is valid.
 * Подключаемся к публичной машине и проверяем наличие соединения с интернетом
 ![alt text](image-7.png)
 ![alt text](image-8.png)
-* Находясь на виртуальной машине private-instance, проверим доступ в Интернет
-![alt text](image-13.png)
 
 * Виртуальная машина private-instance не имеет внешнего IP-адреса. Подключение к данной виртуальной машине выполним через виртуальную машину public-instance, скопировав на нее приватный ключ ssh:
 ![alt text](image-14.png)
